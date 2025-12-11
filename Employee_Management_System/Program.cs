@@ -16,7 +16,19 @@ class Program
 
     static double CalculateDailyWage(Employee employee)
     {
-        return employee.WagesPerHour * employee.DailyWorkingHours;
+        double wage = 0;
+        int hoursWorked = new Random().Next(employee.DailyWorkingHours + 1);
+        int performanceBonus = new Random().Next(1, 5);
+        switch (employee.Type)
+        {
+            case "Part Time":
+                wage = (performanceBonus + hoursWorked) * employee.WagesPerHour;
+                break;
+            case "Full Time":
+                wage = employee.WagesPerHour * (employee.DailyWorkingHours - hoursWorked);
+                break;
+        }
+        return wage;
     }
     
     static void Main(string[] args)
