@@ -18,7 +18,7 @@ class Program
     {
         double wage = 0;
         int hoursWorked = new Random().Next(employee.DailyWorkingHours + 1);
-        int performanceBonus = new Random().Next(1, 5);
+        double performanceBonus = new Random().NextDouble();
         switch (employee.Type)
         {
             case "Part Time":
@@ -30,6 +30,17 @@ class Program
         }
         return wage;
     }
+
+    static double CalculateMonthlyWage(Employee employee)
+    {
+        double monthlyWage = 0;
+        int totalWorkingDay = new Random().Next(21);
+        for (int i = 1; i <= totalWorkingDay; i++)
+        {
+            monthlyWage += CalculateDailyWage(employee);
+        }
+        return monthlyWage;
+    }
     
     static void Main(string[] args)
     {
@@ -37,9 +48,11 @@ class Program
         Employee employee2 = new PartTimeEmployee(102, "Ankit Kumar", 23, true);
         
         IsEmployeePresent(employee1);
-        Console.WriteLine($"{employee1.Name}'s today's Wages: ${CalculateDailyWage(employee1)}");
+        Console.WriteLine($"{employee1.Name}'s today's Wages: ${CalculateDailyWage(employee1).ToString("F2")}");
+        Console.WriteLine($"{employee1.Name}'s Monthly Wages: ${CalculateMonthlyWage(employee1).ToString("F2")}");
         
         IsEmployeePresent(employee2);
-        Console.WriteLine($"{employee2.Name}'s today's Wages: ${CalculateDailyWage(employee2)}");
+        Console.WriteLine($"{employee2.Name}'s today's Wages: ${CalculateDailyWage(employee2).ToString("F2")}");
+        Console.WriteLine($"{employee2.Name}'s Monthly Wages: ${CalculateMonthlyWage(employee2).ToString("F2")}");
     }
 }
