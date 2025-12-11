@@ -1,4 +1,6 @@
-﻿namespace Employee_Management_System;
+﻿using System.Collections;
+
+namespace Employee_Management_System;
 
 class Program
 {
@@ -47,7 +49,7 @@ class Program
         return wage;
     }
     
-    static void CalculateMonthlyWage(Employee employee)
+    static Tuple<double,int> CalculateMonthlyWage(Employee employee)
     {
         Random random = new Random();
         double monthlyWage = 0;
@@ -57,10 +59,20 @@ class Program
         for (int i = 1; i <= totalWorkingDay && totalHoursWorked <= maxWorkingHours; i++)
         {
             int hoursWorked = random.Next(2, employee.DailyWorkingHours + 1);
-            monthlyWage += CalculateDailyWage(employee, hoursWorked);
+            double currentDayWage = CalculateDailyWage(employee, hoursWorked);
+            
+            Console.WriteLine($"{employee.Name}'s Day: #{i} Wages: ${currentDayWage.ToString("F2")}");
+            
+            monthlyWage += currentDayWage;
             totalHoursWorked += hoursWorked;
         }
-        Console.WriteLine($"{employee.Name}'s Monthly Wages: ${monthlyWage.ToString("F2")}, Hours Worked: {totalHoursWorked}");
+        return new Tuple<double, int>(monthlyWage, totalHoursWorked);
+    }
+
+    static void ComputeWage(Employee employee)
+    {
+        Tuple<double,int> monthlyData = CalculateMonthlyWage(employee);
+        Console.WriteLine($"{employee.Name}'s Monthly Wages: ${monthlyData.Item1.ToString("F2")}, Hours Worked: {monthlyData.Item2}");
     }
     
     static void Main(string[] args)
@@ -68,12 +80,7 @@ class Program
         Employee employee1 = new FullTimeEmployee(101, "Naman Vinay Singh", 23,true);
         Employee employee2 = new PartTimeEmployee(102, "Ankit Kumar", 23, true);
         
-        IsEmployeePresent(employee1);
-        Console.WriteLine($"{employee1.Name}'s today's Wages: ${CalculateDailyWage(employee1).ToString("F2")}");
-        CalculateMonthlyWage(employee1);
-        
-        IsEmployeePresent(employee2);
-        Console.WriteLine($"{employee2.Name}'s today's Wages: ${CalculateDailyWage(employee2).ToString("F2")}");
-        CalculateMonthlyWage(employee2);
+        ComputeWage(employee1);
+        ComputeWage(employee2);
     }
 }
