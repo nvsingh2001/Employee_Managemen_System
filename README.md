@@ -11,3 +11,4 @@
 ### Feature: Calculating Wages till Number of Working Days or Total Working Hours per month is Reached.
 ### Feature: Compute Employee Wage Using Class Methods.
 ### Feature: Ability to compute Employee Wage for multiple companies.
+### Feature: Ability to save the Total Wage for Each Company.
