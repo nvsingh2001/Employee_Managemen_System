@@ -12,3 +12,4 @@
 ### Feature: Compute Employee Wage Using Class Methods.
 ### Feature: Ability to compute Employee Wage for multiple companies.
 ### Feature: Ability to save the Total Wage for Each Company.
+### Feature: Ability to manage Employee Wage of multiple companies

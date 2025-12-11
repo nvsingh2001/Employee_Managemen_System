@@ -2,6 +2,7 @@ namespace Employee_Management_System;
 
 internal class Company
 {
+    public int Id { get; private set; }
     public string Name { get;}
     private int TotalNumberOfEmployees { get; set; }
     private double EmployeesPerHourWage { get; }
@@ -10,8 +11,9 @@ internal class Company
     private int _numberOfEmployees;
     public Employee[] Employees { get; private set; }
     
-    public Company(string name, int totalNumberOfEmployees, double employeesPerHourWage)
+    public Company(int id, string name, int totalNumberOfEmployees, double employeesPerHourWage)
     {
+        Id = id;
         Name = name;
         TotalNumberOfEmployees = totalNumberOfEmployees;
         Employees = new Employee[TotalNumberOfEmployees];
@@ -119,17 +121,17 @@ internal class Company
         return monthlyData.Item1;
     }
 
-    public double ComputeEmployeeWage(Company company)
+    public double ComputeEmployeeWage()
     {
         double totalWage = 0;
-        foreach (var employee in company.Employees)
+        foreach (var employee in Employees)
         {
             if (employee == null) break;
             totalWage += ComputeWage(employee);
         }
         
         TotalWage +=  totalWage;
-        Console.WriteLine($"{company.Name} : ${totalWage}");
+        Console.WriteLine($"{Name} : ${totalWage}");
         
         return totalWage;
     }

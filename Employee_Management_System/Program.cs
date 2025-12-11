@@ -7,16 +7,19 @@ class Program
     
     static void Main(string[] args)
     {
-        Company dmart = new Company("Dmart", 2, 20);
+
+        Compaines compaines = new Compaines(2);
         
-        dmart.AddEmployee("Naman Vinay Singh", 23, "Full Time");
-        dmart.AddEmployee("Ankit Kumar", 23, "Part Time");
         
-        Company reliance = new Company("Reliance", 2, 30);
-        reliance.AddEmployee("Prashant Kumar", 23, "Full Time");
-        reliance.AddEmployee("Madhav Sharma", 22, "Part Time");
+        compaines.AddCompany(new Company(0,"Dmart", 2, 20));
+        compaines.GetCompany(0).AddEmployee("Naman Vinay Singh", 23, "Full Time");
+        compaines.GetCompany(0).AddEmployee("Ankit Kumar", 23, "Part Time");
         
-        reliance.ComputeEmployeeWage(dmart);
-        dmart.ComputeEmployeeWage(reliance);
+        compaines.AddCompany(new Company(1,"Reliance", 2, 30));
+        compaines.GetCompany(1).AddEmployee("Prashant Kumar", 23, "Full Time");
+        compaines.GetCompany(1).AddEmployee("Madhav Sharma", 22, "Part Time");
+        
+        compaines.GetCompany(0).ComputeEmployeeWage();
+        compaines.GetCompany(1).ComputeEmployeeWage();
     }
 }
