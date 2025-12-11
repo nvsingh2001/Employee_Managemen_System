@@ -68,18 +68,38 @@ class Program
         return new Tuple<double, int>(monthlyWage, totalHoursWorked);
     }
 
-    static void ComputeWage(Employee employee)
+    static double ComputeWage(Employee employee)
     {
         Tuple<double,int> monthlyData = CalculateMonthlyWage(employee);
         Console.WriteLine($"{employee.Name}'s Monthly Wages: ${monthlyData.Item1.ToString("F2")}, Hours Worked: {monthlyData.Item2}");
+        return monthlyData.Item1;
+    }
+
+    static double ComputeEmployeeWage(Company company)
+    {
+        double totalWage = 0;
+        foreach (var employee in company.employees)
+        {
+            if (employee == null) break;
+            totalWage += ComputeWage(employee);
+        }
+        Console.WriteLine($"{company.Name} : ${totalWage}");
+        
+        return totalWage;
     }
     
     static void Main(string[] args)
     {
-        Employee employee1 = new FullTimeEmployee(101, "Naman Vinay Singh", 23,true);
-        Employee employee2 = new PartTimeEmployee(102, "Ankit Kumar", 23, true);
+        Company dmart = new Company("Dmart", 2, 20);
         
-        ComputeWage(employee1);
-        ComputeWage(employee2);
+        dmart.AddEmployee("Naman Vinay Singh", 23, "Full Time");
+        dmart.AddEmployee("Ankit Kumar", 23, "Part Time");
+        
+        Company reliance = new Company("Reliance", 2, 30);
+        reliance.AddEmployee("Prashant Kumar", 23, "Full Time");
+        reliance.AddEmployee("Madhav Sharma", 22, "Part Time");
+        
+        ComputeEmployeeWage(dmart);
+        ComputeEmployeeWage(reliance);
     }
 }
