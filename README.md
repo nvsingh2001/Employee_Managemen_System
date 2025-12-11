@@ -5,3 +5,4 @@
 
 ### Feature: Check Employee Presence.
 ### Feature: Calculating Employee Wage.
+### Feature: Add Part Time Employee.

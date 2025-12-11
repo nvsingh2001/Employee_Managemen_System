@@ -4,7 +4,7 @@ class Program
 {
     static void IsEmployeePresent(Employee employee)
     {
-        if (employee.IsFullTime)
+        if (employee.IsEmployeePresent)
         {
             Console.WriteLine($"{employee.Name} is Present");
         }
@@ -16,14 +16,18 @@ class Program
 
     static double CalculateDailyWage(Employee employee)
     {
-        int hoursWorked = new Random().Next(1, 10);
-        return employee.WagesPerHour * hoursWorked;
+        return employee.WagesPerHour * employee.DailyWorkingHours;
     }
+    
     static void Main(string[] args)
     {
-        Employee employee1 = new Employee(101, "Naman Vinay Singh", 23, true, 20.00);
+        Employee employee1 = new FullTimeEmployee(101, "Naman Vinay Singh", 23,true);
+        Employee employee2 = new PartTimeEmployee(102, "Ankit Kumar", 23, true);
         
         IsEmployeePresent(employee1);
         Console.WriteLine($"{employee1.Name}'s today's Wages: ${CalculateDailyWage(employee1)}");
+        
+        IsEmployeePresent(employee2);
+        Console.WriteLine($"{employee2.Name}'s today's Wages: ${CalculateDailyWage(employee2)}");
     }
 }
