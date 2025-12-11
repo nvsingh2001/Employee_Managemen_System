@@ -4,16 +4,11 @@ namespace Employee_Management_System;
 
 class Program
 {
-    static void IsEmployeePresent(Employee employee)
+    static bool IsEmployeePresent(Employee employee)
     {
-        if (employee.IsEmployeePresent)
-        {
-            Console.WriteLine($"{employee.Name} is Present");
-        }
-        else
-        {
-            Console.WriteLine($"{employee.Name} is not Present");
-        }
+        int present = new Random().Next(0, 2);
+        if(present == 1) return true;
+        return false;
     }
 
     static double CalculateDailyWage(Employee employee)
@@ -36,6 +31,7 @@ class Program
     static double CalculateDailyWage(Employee employee,int hoursWorked)
     {
         double wage = 0;
+        if (IsEmployeePresent(employee)) return wage; 
         double performanceBonus = new Random().Next(0,2);
         switch (employee.Type)
         {
@@ -53,15 +49,18 @@ class Program
     {
         Random random = new Random();
         double monthlyWage = 0;
-        int totalWorkingDay = random.Next(1,21);
+        const int totalWorkingDay = 20;
         int totalHoursWorked = 0;
         const int maxWorkingHours = 120;
         for (int i = 1; i <= totalWorkingDay && totalHoursWorked <= maxWorkingHours; i++)
         {
             int hoursWorked = random.Next(2, employee.DailyWorkingHours + 1);
             double currentDayWage = CalculateDailyWage(employee, hoursWorked);
-            
-            Console.WriteLine($"{employee.Name}'s Day: #{i} Wages: ${currentDayWage.ToString("F2")}");
+
+            if (currentDayWage != 0)
+            {
+                Console.WriteLine($"{employee.Name}'s Day: #{i} Wages: ${currentDayWage.ToString("F2")}");
+            }
             
             monthlyWage += currentDayWage;
             totalHoursWorked += hoursWorked;
